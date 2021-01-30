@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="cover-minus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="cover-quantity" type="text" class="form-control text-center" value="1">
+                           <button id="cover-plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="cover-price" >59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subtotal">1,278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -78,17 +78,55 @@
       </div>
    </section>
    <script>
+      const eachPhonePrice = 1219;
+      const eachCoverPrice = 59;
+      var newPhoneCost = 1219;
+      var newCoverCost = 59;
       //phone quantity and price event handler
       document.getElementById('phone-plus').addEventListener('click', function(){
-         const eachPhonePrice = 1219;
-         var currentQuantity = quantityCheck('phone-quantity'); 
+         const change = 1;
+         var currentQuantity = quantityCheck('phone-quantity', change); 
          var newPhoneCost = costUpdate('phone-price', currentQuantity, eachPhonePrice);
+         var totalCost = parseInt(document.getElementById('cover-price').innerText) + newPhoneCost;
+         document.getElementById('subtotal').innerText = totalCost;
+         document.getElementById('total').innerText = totalCost;
       }) 
+      document.getElementById('phone-minus').addEventListener('click', function(){
+         const change = -1;
+         var currentQuantity = quantityCheck('phone-quantity', change);
+         var newPhoneCost = costUpdate('phone-price', currentQuantity, eachPhonePrice);
+         var totalCost = parseInt(document.getElementById('cover-price').innerText) + newPhoneCost;
+         document.getElementById('subtotal').innerText = totalCost;
+         document.getElementById('total').innerText = totalCost;
+      })
+      document.getElementById('cover-plus').addEventListener('click', function(){
+         const change = 1;
+         var currentQuantity = quantityCheck('cover-quantity', change);
+         var newCoverCost = costUpdate('cover-price', currentQuantity, eachCoverPrice);
+         var totalCost = parseInt(document.getElementById('phone-price').innerText) + newCoverCost;
+         document.getElementById('subtotal').innerText = totalCost;
+         document.getElementById('total').innerText = totalCost;
 
-      function quantityCheck(id){
+      })
+      document.getElementById('cover-minus').addEventListener('click', function(){
+         const change = -1;
+         var currentQuantity = quantityCheck('cover-quantity', change);
+         var newCoverCost = costUpdate('cover-price', currentQuantity, eachCoverPrice);
+         var totalCost = parseInt(document.getElementById('phone-price').innerText) + newCoverCost;
+         document.getElementById('subtotal').innerText = totalCost;
+         document.getElementById('total').innerText = totalCost;
+      })
+      // function totalCostUpdate(phoneCost=newPhoneCost, coverCost=newCoverCost){
+      //    var totalCost = phoneCost + coverCost;
+      //    console.log(totalCost);
+      //    document.getElementById('subtotal').innerText = totalCost;
+      //    document.getElementById('total').innerText = totalCost;
+      // }
+
+      function quantityCheck(id, change){
          var quantity = document.getElementById(id).value;
          var quantityNum = parseInt(quantity);
-         var newQuantity = quantityNum + 1;
+         var newQuantity = quantityNum + change;
          document.getElementById(id).value = newQuantity;
          return newQuantity;
       }
@@ -99,6 +137,7 @@
          return newCost;       
       }
       
+
 
    </script>
 </body>
