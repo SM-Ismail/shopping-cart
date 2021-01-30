@@ -119,8 +119,14 @@
          var quantity = document.getElementById(id).value;
          var quantityNum = parseInt(quantity);
          var newQuantity = quantityNum + change;
-         document.getElementById(id).value = newQuantity;
-         return newQuantity;
+         if(newQuantity >= 0){
+            document.getElementById(id).value = newQuantity;
+            return newQuantity;
+         }
+         else{
+            newQuantity = 0;
+            return newQuantity;
+         }
       }
 
       function costUpdate(id, currentQuantity, price){
