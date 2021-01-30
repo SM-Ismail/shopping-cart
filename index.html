@@ -87,41 +87,32 @@
          const change = 1;
          var currentQuantity = quantityCheck('phone-quantity', change); 
          var newPhoneCost = costUpdate('phone-price', currentQuantity, eachPhonePrice);
-         var totalCost = parseInt(document.getElementById('cover-price').innerText) + newPhoneCost;
-         document.getElementById('subtotal').innerText = totalCost;
-         document.getElementById('total').innerText = totalCost;
+         totalCostUpdate();
       }) 
       document.getElementById('phone-minus').addEventListener('click', function(){
          const change = -1;
          var currentQuantity = quantityCheck('phone-quantity', change);
          var newPhoneCost = costUpdate('phone-price', currentQuantity, eachPhonePrice);
-         var totalCost = parseInt(document.getElementById('cover-price').innerText) + newPhoneCost;
-         document.getElementById('subtotal').innerText = totalCost;
-         document.getElementById('total').innerText = totalCost;
+         totalCostUpdate();
       })
       document.getElementById('cover-plus').addEventListener('click', function(){
          const change = 1;
          var currentQuantity = quantityCheck('cover-quantity', change);
          var newCoverCost = costUpdate('cover-price', currentQuantity, eachCoverPrice);
-         var totalCost = parseInt(document.getElementById('phone-price').innerText) + newCoverCost;
-         document.getElementById('subtotal').innerText = totalCost;
-         document.getElementById('total').innerText = totalCost;
+         totalCostUpdate();
 
       })
       document.getElementById('cover-minus').addEventListener('click', function(){
          const change = -1;
          var currentQuantity = quantityCheck('cover-quantity', change);
          var newCoverCost = costUpdate('cover-price', currentQuantity, eachCoverPrice);
-         var totalCost = parseInt(document.getElementById('phone-price').innerText) + newCoverCost;
+         totalCostUpdate();
+      })
+      function totalCostUpdate(){
+         var totalCost = parseInt(document.getElementById('phone-price').innerText) + parseInt(document.getElementById('cover-price').innerText);
          document.getElementById('subtotal').innerText = totalCost;
          document.getElementById('total').innerText = totalCost;
-      })
-      // function totalCostUpdate(phoneCost=newPhoneCost, coverCost=newCoverCost){
-      //    var totalCost = phoneCost + coverCost;
-      //    console.log(totalCost);
-      //    document.getElementById('subtotal').innerText = totalCost;
-      //    document.getElementById('total').innerText = totalCost;
-      // }
+      }
 
       function quantityCheck(id, change){
          var quantity = document.getElementById(id).value;
